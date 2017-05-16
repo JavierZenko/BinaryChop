@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author zenko
  */
-public class IterativeStyleSearch {
+public class IterativeStyleSearch 
+        implements BinarySearcher { 
     
     /**
      *
@@ -19,6 +20,7 @@ public class IterativeStyleSearch {
      * @param value
      * @return
      */
+    @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
         if(!BinaryChopUtils.isSorted(numbers)) {
             throw new IllegalArgumentException("list should be ordered");

@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author zenko
  */
-public class SliceStyleSearch {
+public class SliceStyleSearch 
+        implements BinarySearcher { 
     
     private int SliceSearch(ArrayList<Integer> numbers, Integer value, Integer ini) {
         if(numbers.isEmpty()) {

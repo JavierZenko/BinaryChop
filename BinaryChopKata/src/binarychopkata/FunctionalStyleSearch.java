@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author zenko
  */
-public class FunctionalStyleSearch {
+public class FunctionalStyleSearch 
+        implements BinarySearcher {    
     private int FunctionalSearch(ArrayList<Integer> numbers, Integer value, int start, int end) {
         if(start > end) {
             return -1;
@@ -25,6 +26,7 @@ public class FunctionalStyleSearch {
             return FunctionalSearch(numbers, value, start, (start + end)/2 - 1);            
         }        
     }
+    @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
         return FunctionalSearch(numbers, value, 0, numbers.size()-1);
     }

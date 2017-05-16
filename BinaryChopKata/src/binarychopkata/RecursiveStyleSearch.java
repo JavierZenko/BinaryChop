@@ -12,7 +12,8 @@ import java.util.ArrayList;
  *
  * @author zenko
  */
-public class RecursiveStyleSearch {
+public class RecursiveStyleSearch 
+        implements BinarySearcher { 
     
     private int RecursiveSearch(ArrayList<Integer> numbers, Integer value, int start, int end) {
         int curr;
@@ -37,6 +38,7 @@ public class RecursiveStyleSearch {
         return RecursiveSearch(numbers, value, s, e);
     }
     
+    @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
         if(!BinaryChopUtils.isSorted(numbers)) {
             throw new IllegalArgumentException("list should be ordered");
