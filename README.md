@@ -1,4 +1,4 @@
-#BinaryChop
+# BinaryChop
 
 free adaptation of the following kata:
 
