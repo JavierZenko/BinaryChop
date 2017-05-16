@@ -22,7 +22,9 @@ public class BinaryChopKata {
         //IterativeStyleSearch iss = new IterativeStyleSearch();
         //RecursiveStyleSearch iss = new RecursiveStyleSearch();
         //FunctionalStyleSearch iss = new FunctionalStyleSearch();
-        SliceStyleSearch iss = new SliceStyleSearch();
+        //SliceStyleSearch iss = new SliceStyleSearch();
+        FlagIterativeBinarySearch iss = new FlagIterativeBinarySearch();
+        
         ArrayList<Integer> test1 = new ArrayList<>();
         test1.add(1);
         test1.add(2);
