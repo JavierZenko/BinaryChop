@@ -16,6 +16,10 @@ public class FlagIterativeBinarySearch
     
     @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
+        if(!BinaryChopUtils.isSorted(numbers)) {
+            throw new IllegalArgumentException("list should be ordered");
+        }
+        
         int lowerBound = 0;
         int upperBound = numbers.size() - 1;
         int midPoint = -1;

@@ -31,7 +31,12 @@ public class SliceStyleSearch
         }
     }
     
+    @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
+        if(!BinaryChopUtils.isSorted(numbers)) {
+            throw new IllegalArgumentException("list should be ordered");
+        }
+        
         int found = SliceSearch(numbers, value, 0);
         
         return found;
