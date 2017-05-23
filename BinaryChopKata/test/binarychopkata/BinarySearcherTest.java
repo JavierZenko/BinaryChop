@@ -6,18 +6,32 @@
 package binarychopkata;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author zenko
  */
-public class FlagIterativeBinarySearchTest {
+@RunWith(Parameterized.class)
+public class BinarySearcherTest {
+    
+    public BinarySearcher searcher;
+    @Parameterized.Parameters
+    public static Collection<Object[]> instancesToTest() {
+        return Arrays.asList(
+                    new Object[]{new FlagIterativeBinarySearch()},
+                    new Object[]{new FunctionalStyleSearch()}
+        );
+    }
     
     private static ArrayList<Integer> badlySortedArray;
     private static ArrayList<Integer> sortedOddArray;
@@ -25,7 +39,8 @@ public class FlagIterativeBinarySearchTest {
     private static ArrayList<Integer> emptyArray;
     private static ArrayList<Integer> nullArray;
     
-    public FlagIterativeBinarySearchTest() {
+    public BinarySearcherTest(BinarySearcher searcher) {
+        this.searcher = searcher;
     }
     
     @BeforeClass
@@ -60,14 +75,10 @@ public class FlagIterativeBinarySearchTest {
     @AfterClass
     public static void tearDownClass() {
         badlySortedArray.clear();
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        sortedOddArray.clear();
+        sortedEvenArray.clear();
+        emptyArray.clear();
+        
     }
 
     /**
@@ -77,9 +88,8 @@ public class FlagIterativeBinarySearchTest {
     public void testUnsortedSearch() {
         System.out.println("UnsortedSearch");      
         Integer value = 5;
-        FlagIterativeBinarySearch instance = new FlagIterativeBinarySearch();
         
-        instance.Search(badlySortedArray, value);                       
+        this.searcher.Search(badlySortedArray, value);                       
     }
     
     @Test
@@ -87,30 +97,29 @@ public class FlagIterativeBinarySearchTest {
         System.out.println("SearchOddArray");
         Integer value;               
         int result;
-        FlagIterativeBinarySearch instance = new FlagIterativeBinarySearch();
         
         value = 1;
-        result = instance.Search(sortedOddArray, value);        
+        result = this.searcher.Search(sortedOddArray, value);        
         assertEquals(0, result);
         
         value = 5;
-        result = instance.Search(sortedOddArray, value);
+        result = this.searcher.Search(sortedOddArray, value);
         assertEquals(2, result);
         
         value = 9;
-        result = instance.Search(sortedOddArray, value);
+        result = this.searcher.Search(sortedOddArray, value);
         assertEquals(4, result);
         
         value = 0;
-        result = instance.Search(sortedOddArray, value);
+        result = this.searcher.Search(sortedOddArray, value);
         assertEquals(-1, result);
         
         value = 2;
-        result = instance.Search(sortedOddArray, value);
+        result = this.searcher.Search(sortedOddArray, value);
         assertEquals(-1, result);
         
         value = 10;
-        result = instance.Search(sortedOddArray, value);
+        result = this.searcher.Search(sortedOddArray, value);
         assertEquals(-1, result);
     }       
     
@@ -119,30 +128,29 @@ public class FlagIterativeBinarySearchTest {
         System.out.println("SearchEvenArray");
         Integer value;
         int result;
-        FlagIterativeBinarySearch instance = new FlagIterativeBinarySearch();
         
         value = 2;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(0, result);        
         
         value = 8;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(3, result);
         
         value = 12;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(5, result);
         
         value = 1;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(-1, result);
         
         value = 3;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(-1, result);  
         
         value = 13;
-        result = instance.Search(sortedEvenArray, value);        
+        result = this.searcher.Search(sortedEvenArray, value);        
         assertEquals(-1, result);        
     }
     
@@ -151,10 +159,9 @@ public class FlagIterativeBinarySearchTest {
         System.out.println("SearchEmptyArray");
         Integer value;
         int result;
-        FlagIterativeBinarySearch instance = new FlagIterativeBinarySearch();
         
         value = 2;
-        result = instance.Search(emptyArray, value);        
+        result = this.searcher.Search(emptyArray, value);        
         assertEquals(-1, result);        
     }
     
@@ -162,9 +169,8 @@ public class FlagIterativeBinarySearchTest {
     public void testSearchNullArray() {
         System.out.println("SearchNullArray");
         Integer value;
-        FlagIterativeBinarySearch instance = new FlagIterativeBinarySearch();
         
         value = 2;
-        instance.Search(nullArray, value);      
+        this.searcher.Search(nullArray, value);      
     }
 }

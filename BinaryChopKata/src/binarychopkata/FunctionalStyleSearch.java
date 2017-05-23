@@ -28,6 +28,10 @@ public class FunctionalStyleSearch
     }
     @Override
     public int Search(ArrayList<Integer> numbers, Integer value) {
+        if(numbers == null) {
+            throw new IllegalArgumentException("numbers shouldn't be null");
+        }
+                
         if(!BinaryChopUtils.isSorted(numbers)) {
             throw new IllegalArgumentException("list should be ordered");
         }
