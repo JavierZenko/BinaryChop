@@ -5,6 +5,11 @@
  */
 package binarychopkata;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,61 +22,64 @@ public class BinaryChopKata {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Integer found;
-                
-        //IterativeStyleSearch iss = new IterativeStyleSearch();
-        //RecursiveStyleSearch iss = new RecursiveStyleSearch();
-        //FunctionalStyleSearch iss = new FunctionalStyleSearch();
-        //SliceStyleSearch iss = new SliceStyleSearch();
-        FlagIterativeBinarySearch iss = new FlagIterativeBinarySearch();
         
-        ArrayList<Integer> test1 = new ArrayList<>();
-        test1.add(1);
-        test1.add(2);
-        test1.add(3);
-        test1.add(5);
+        if(args.length != 2) {
+            System.err.println("Usage: BinaryChopKata <number> <file>");
+            System.exit(1);
+        }
         
-        found = iss.Search(test1, 1);        
-        System.out.println(found);
-        found = iss.Search(test1, 2);        
-        System.out.println(found);
-        found = iss.Search(test1, 3);        
-        System.out.println(found);
-        found = iss.Search(test1, 5);        
-        System.out.println(found);
-        found = iss.Search(test1, 6);        
-        System.out.println(found);
-        found = iss.Search(test1, 0);        
-        System.out.println(found);
-        found = iss.Search(test1, 4);        
-        System.out.println(found);
-        System.out.println();
+        Integer numberToSearch = null;
+        try {
+            numberToSearch = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            System.err.println("Argument " + args[0] + " must be an integer.");
+            System.exit(1);
+        }
         
-        ArrayList<Integer> test2 = new ArrayList<>();
-        test2.add(1);
-        test2.add(2);
-        test2.add(3);
-        test2.add(4);
-        test2.add(6);
+        ArrayList<Integer> list = new ArrayList<>();
+        File file = new File(args[1]);
+        BufferedReader reader = null;
+        int returnValue = -1;
+        boolean error = false;
         
-        found = iss.Search(test2, 1);                
-        System.out.println(found);
-        found = iss.Search(test2, 2);        
-        System.out.println(found);
-        found = iss.Search(test2, 3);        
-        System.out.println(found);
-        found = iss.Search(test2, 4);        
-        System.out.println(found);
-        found = iss.Search(test2, 6);        
-        System.out.println(found);
-        found = iss.Search(test2, 7);        
-        System.out.println(found);
-        found = iss.Search(test2, 0);        
-        System.out.println(found);
-        found = iss.Search(test2, 5);        
-        System.out.println(found);
-        
-                
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String text = null;
+
+            while ((text = reader.readLine()) != null) {
+                list.add(Integer.parseInt(text));
+            }
+
+            BinarySearcher searcher = new FlagIterativeBinarySearch();
+            returnValue = searcher.Search(list, numberToSearch);
+            
+            if(returnValue == -1) {
+                System.out.println("Number not found.");
+            } else {
+                System.out.println("Number found at position: " + returnValue);
+            }
+            
+        } catch (FileNotFoundException e) {
+            System.err.println("File: " + args[1] + " Not Found.");
+            error = true;
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + args[1] + ".");
+            error = true;
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing integers from file " + args[1] + ".");
+            error = true;
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+            }
+        }                
+
+        if(error) {
+            System.exit(1);
+        }
     }
     
 }
