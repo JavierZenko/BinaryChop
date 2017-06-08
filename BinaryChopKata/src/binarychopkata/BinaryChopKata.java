@@ -25,7 +25,7 @@ public class BinaryChopKata {
         
         if(args.length != 2) {
             System.err.println("Usage: BinaryChopKata <number> <file>");
-            System.exit(1);
+            return;
         }
         
         Integer numberToSearch = null;
@@ -33,14 +33,13 @@ public class BinaryChopKata {
             numberToSearch = Integer.parseInt(args[0]);
         } catch (NumberFormatException e) {
             System.err.println("Argument " + args[0] + " must be an integer.");
-            System.exit(1);
+            return;
         }
         
         ArrayList<Integer> list = new ArrayList<>();
         File file = new File(args[1]);
         BufferedReader reader = null;
         int returnValue = -1;
-        boolean error = false;
         
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -61,13 +60,10 @@ public class BinaryChopKata {
             
         } catch (FileNotFoundException e) {
             System.err.println("File: " + args[1] + " Not Found.");
-            error = true;
         } catch (IOException e) {
-            System.err.println("Error reading file: " + args[1] + ".");
-            error = true;
+            System.err.println("Error reading file: " + args[1] + ".");            
         } catch (NumberFormatException e) {
             System.err.println("Error parsing integers from file " + args[1] + ".");
-            error = true;
         } finally {
             try {
                 if (reader != null) {
@@ -76,10 +72,6 @@ public class BinaryChopKata {
             } catch (IOException e) {
             }
         }                
-
-        if(error) {
-            System.exit(1);
-        }
     }
     
 }
