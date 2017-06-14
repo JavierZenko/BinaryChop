@@ -8,9 +8,7 @@ package binarychopkata;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,7 +17,7 @@ import org.junit.runners.Parameterized;
 
 /**
  *
- * @author zenko
+ * @author JavierZenko
  */
 @RunWith(Parameterized.class)
 public class BinarySearcherTest {

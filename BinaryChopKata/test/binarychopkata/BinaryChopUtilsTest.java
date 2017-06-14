@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author zenko
+ * @author JavierZenko
  */
 public class BinaryChopUtilsTest {
     private static ArrayList<Integer> wellSortedArray;

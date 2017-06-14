@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author zenko
+ * @author JavierZenko
  */
 public class BinaryChopKataIT {
     
